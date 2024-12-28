@@ -10,7 +10,6 @@ import arcjet, {
   const aj = arcjet({
     key: process.env.ARCJET_KEY,
     rules: [
-      //protect sign up form
       protectSignup({
         email: {
           mode: "LIVE",
@@ -118,7 +117,7 @@ import arcjet, {
       }),
       slidingWindow({
         mode: "LIVE",
-        interval: "10m", // counts requests over a 10 minute sliding window
+        interval: "10m", 
         max: 5,
       }),
     ],
