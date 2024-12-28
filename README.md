@@ -20,7 +20,7 @@ Welcome to the **BlogEase**, a modern and fully-featured blog platform built usi
 
 ### Backend
 
-- **Arcjet**: High-performance backend integration for seamless API communication.
+- **Arcjet**: Bot detection. Rate limiting. Email validation. Attack protection. Data redaction.
 - **Zod**: Schema validation for enhanced data safety.
 
 ### Tools
