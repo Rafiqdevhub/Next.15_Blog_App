@@ -2,7 +2,7 @@ import { createMiddleware } from "@arcjet/next";
 import aj from "./lib/arcjet";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-// import { verifyAuth } from "./lib/auth"; 
+import { verifyAuth } from "./lib/auth"; 
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|healthz).*)"],
@@ -14,10 +14,8 @@ export async function middleware(request) {
   const arcjetResponse = await arcjetMiddleware(request);
   let response = NextResponse.next();
 
-  // Log middleware response for debugging
   console.log("Arcjet Middleware Response:", arcjetResponse);
 
-  // Protected routes list
   const protectedRoutes = ["/"];
 
   const isProtectedRoute = protectedRoutes.some(
