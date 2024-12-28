@@ -17,9 +17,6 @@ Welcome to the **BlogEase**, a modern and fully-featured blog platform built usi
 - **ShadCN**: A component library for consistent UI elements.
 - **Arcjet**: Bot detection. Rate limiting. Email validation. Attack protection. Data redaction.
 - **Zod**: Schema validation for enhanced data safety.
-
-### Tools
-
 - **React Hook**: For managing component states and side effects.
 
 ## Installation
