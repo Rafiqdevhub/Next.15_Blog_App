@@ -1,6 +1,6 @@
 import RegisterForm from "@/components/auth/RegisterForm"
-import { Link } from "lucide-react";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const RegisterPage = async() => {
