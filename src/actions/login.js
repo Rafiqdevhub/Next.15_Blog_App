@@ -1,7 +1,7 @@
 "use server";
 
 import { loginRules } from "@/lib/arcjet";
-import User from "@/components/models/userModel";
+import User from "@/models/userModel";
 import { request } from "@arcjet/next";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
