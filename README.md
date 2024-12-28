@@ -12,14 +12,9 @@ Welcome to the **BlogEase**, a modern and fully-featured blog platform built usi
 
 ## Tech Stack
 
-### Frontend
-
 - **Next.js 15**: The latest version for server-side rendering and static site generation.
 - **TailwindCSS**: A utility-first CSS framework for rapid UI development.
 - **ShadCN**: A component library for consistent UI elements.
-
-### Backend
-
 - **Arcjet**: Bot detection. Rate limiting. Email validation. Attack protection. Data redaction.
 - **Zod**: Schema validation for enhanced data safety.
 
