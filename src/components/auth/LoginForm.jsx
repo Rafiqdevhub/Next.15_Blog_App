@@ -1,63 +1,63 @@
 "use client";
 
-import React, { useState } from 'react'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import { useToast } from '../hooks/use-toast'
-import { useRouter } from 'next/navigation'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useToast } from "../hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Key, User } from "lucide-react";
-import { loginUserAction } from '@/actions/login';
-
+import { loginUserAction } from "@/actions/login";
 
 const schema = z.object({
-    email: z.string().email({ message: "Please enter a valid email address" }),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long." }),
-  });
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long." }),
+});
 
 const LoginForm = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      resolver: zodResolver(schema),
-    });
-    const { toast } = useToast();
-    const router = useRouter();
-  
-    const onSubmit = async (data) => {
-      setIsLoading(true);
-      try {
-        const formData = new FormData();
-        Object.keys(data).forEach((key) => formData.append(key, data[key]));
-        const result = await loginUserAction(formData);
-        if (result.success) {
-          toast({
-            title: "Login successful",
-            description: result.success,
-          });
-          router.push("/");
-        } else {
-          throw new Error(result.error || "Something wrong occurred");
-        }
-      } catch (e) {
-        console.log(e);
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+      const result = await loginUserAction(formData);
+      if (result.success) {
         toast({
-          title: "Login failed",
-          description: e.message,
-          variant: "destructive",
+          title: "Login successful",
+
+          description: result.success,
         });
-      } finally {
-        setIsLoading(false);
+        router.push("/");
+      } else {
+        throw new Error(result.error || "Something wrong occurred");
       }
-    };
-    
+    } catch (e) {
+      console.log(e);
+      toast({
+        title: "Login failed",
+        description: e.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-4">
@@ -90,7 +90,7 @@ const LoginForm = () => {
         Login
       </Button>
     </form>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
