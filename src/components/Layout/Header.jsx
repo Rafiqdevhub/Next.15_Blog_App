@@ -138,8 +138,8 @@ const Header = ({ user }) => {
                   }}
                   key={searchResultItem._id}
                   className={`cursor-pointer
-                   flex gap-6
-                 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
+                  flex gap-6
+                bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
                 >
                   <div className={`w-1/3 h-full relative`}>
                     <img
