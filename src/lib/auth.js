@@ -1,6 +1,6 @@
 import { jwtVerify } from "jose";
 
-export async function verifyAuth(token) {
+export const verifyAuth = async (token) => {
   if (!token) {
     return null;
   }
@@ -22,4 +22,4 @@ export async function verifyAuth(token) {
 
     return null;
   }
-}
+};
