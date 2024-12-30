@@ -26,6 +26,7 @@ import {
   SheetTitle,
 } from "../ui/sheet";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 const searchSchema = z.object({
   query: z.string().min(1, "Query is required"),
@@ -44,7 +45,7 @@ const Header = ({ user }) => {
     resolver: zodResolver(searchSchema),
   });
 
-  console.log(user, "useruseruser");
+  // console.log(user, "user");
 
   const onSearchSubmit = async (data) => {};
   const handleLogout = async () => {};
@@ -138,8 +139,8 @@ const Header = ({ user }) => {
                   }}
                   key={searchResultItem._id}
                   className={`cursor-pointer
-                  flex gap-6
-                bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
+                flex gap-6
+              bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
                 >
                   <div className={`w-1/3 h-full relative`}>
                     <img
@@ -189,7 +190,7 @@ const Header = ({ user }) => {
         <DialogContent className="max-h-[600px] overflow-auto">
           <DialogTitle>Payment</DialogTitle>
           {showPaypalButton ? (
-            <PaypalButton setIsPaymentDialog={setIsPaymentDialog} />
+            <PayPalButtons setIsPaymentDialog={setIsPaymentDialog} />
           ) : (
             <div>
               <Input
