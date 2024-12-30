@@ -61,9 +61,9 @@ const Header = ({ user }) => {
                 className="text-2xl cursor-pointer font-bold font-serif tracking-tighter"
               >
                 <span className="bg-black text-white px-2 py-1 rounded-full">
-                  M
+                  B
                 </span>
-                <span className="ml-1">Medium</span>
+                <span className="ml-1">BlogEase</span>
               </h1>
             </div>
             <div className="flex items-center space-x-4">
