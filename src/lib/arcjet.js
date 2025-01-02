@@ -58,12 +58,12 @@ export const blogPostRules = arcjet({
       allow: [],
     }),
     shield({ mode: "DRY_RUN" }),
-    // tokenBucket({
-    //   mode: "LIVE",
-    //   refillRate: 20,
-    //   interval: "1m",
-    //   capacity: 2,
-    // }),
+    tokenBucket({
+      mode: "DRY_RUN",
+      refillRate: 20,
+      interval: "1m",
+      capacity: 2,
+    }),
   ],
 });
 
