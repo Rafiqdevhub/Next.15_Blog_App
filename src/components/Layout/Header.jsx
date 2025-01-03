@@ -45,8 +45,6 @@ const Header = ({ user }) => {
     resolver: zodResolver(searchSchema),
   });
 
-  // console.log(user, "user");
-
   const onSearchSubmit = async (data) => {};
   const handleLogout = async () => {};
   const handleProceedWithCheckout = async () => {};
