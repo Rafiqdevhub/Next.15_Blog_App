@@ -16,17 +16,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Edit, LogOut, Search, Wallet } from "lucide-react";
+import { Edit, LogOut, Search } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "../ui/sheet";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import { logoutUserAction } from "@/actions/logout";
 
 const searchSchema = z.object({
   query: z.string().min(1, "Query is required"),
@@ -36,18 +29,47 @@ const Header = ({ user }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isPaymentDialog, setIsPaymentDialog] = useState(false);
-  const [showPaypalButton, setShowPaypalButton] = useState(false);
-  const [paymentEmail, setPaymentEmail] = useState("");
   const { toast } = useToast();
 
   const { register, handleSubmit, reset } = useForm({
     resolver: zodResolver(searchSchema),
   });
 
-  const onSearchSubmit = async (data) => {};
-  const handleLogout = async () => {};
-  const handleProceedWithCheckout = async () => {};
+  const onSearchSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      const result = await searchPostsAction(data.query);
+      console.log(result);
+      if (result.success) {
+        setSearchResults(result.posts);
+        setIsSheetOpen(true);
+        reset();
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (e) {
+      toast({
+        title: "Error",
+        description: e.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    const result = await logoutUserAction();
+    if (result.success) {
+      router.push("/login");
+    } else {
+      toast({
+        title: "Error",
+        description: result.error,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white z-50">
@@ -85,15 +107,7 @@ const Header = ({ user }) => {
               >
                 <Edit className="h-6 w-6" />
               </Button>
-              {!user?.isPremium ? (
-                <Button
-                  onClick={() => setIsPaymentDialog(true)}
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Wallet className="w-6 h-6" />
-                </Button>
-              ) : null}
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="h-8 w-8 cursor-pointer">
@@ -104,11 +118,6 @@ const Header = ({ user }) => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  {user?.isPremium && (
-                    <DropdownMenuItem>
-                      <span>Premium User</span>
-                    </DropdownMenuItem>
-                  )}
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="h-4 w-4" />
                     <span>Log Out</span>
@@ -178,34 +187,6 @@ const Header = ({ user }) => {
           </div>
         </SheetContent>
       </Sheet>
-      <Dialog
-        open={isPaymentDialog}
-        onOpenChange={() => {
-          setIsPaymentDialog(false);
-          setShowPaypalButton(false);
-        }}
-      >
-        <DialogContent className="max-h-[600px] overflow-auto">
-          <DialogTitle>Payment</DialogTitle>
-          {showPaypalButton ? (
-            <PayPalButtons setIsPaymentDialog={setIsPaymentDialog} />
-          ) : (
-            <div>
-              <Input
-                value={paymentEmail}
-                onChange={(event) => setPaymentEmail(event.target.value)}
-                placeholder="Enter your email to proceed!"
-              />
-              <Button
-                onClick={handleProceedWithCheckout}
-                className="w-full mt-3"
-              >
-                Proceed with Checkout
-              </Button>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </header>
   );
 };
