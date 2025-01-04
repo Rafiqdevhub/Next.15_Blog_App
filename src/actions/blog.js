@@ -136,8 +136,6 @@ export async function getBlogPostsAction() {
       };
     }
 
-    console.log(decision, "decision123");
-
     await connectToDatabase();
 
     const posts = await BlogPost.find({})
