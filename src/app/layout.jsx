@@ -14,21 +14,20 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Blog Ease",
-  description: "A blog platform for developers",
+  description:
+    "A blog platform for developers to share their knowledge and expertise.",
 };
 
-const RootLayout=({ children })=> {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Layout>
-          {children}
-        </Layout>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
-}
+};
 
 export default RootLayout;
