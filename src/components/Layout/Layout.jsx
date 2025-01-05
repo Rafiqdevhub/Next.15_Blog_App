@@ -1,6 +1,7 @@
 import { verifyAuth } from "@/lib/auth";
 import Header from "./Header";
 import { cookies } from "next/headers";
+import Footer from "./Footer";
 
 const Layout = async ({ children }) => {
   const token = (await cookies()).get("token")?.value;
@@ -10,6 +11,7 @@ const Layout = async ({ children }) => {
     <div className="min-h-screen bg-white">
       {user && <Header user={user} />}
       {children}
+      <Footer />
     </div>
   );
 };
