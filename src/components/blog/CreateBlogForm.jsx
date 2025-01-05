@@ -131,9 +131,7 @@ const CreateBlogForm = ({ user }) => {
   }, []);
 
   const isBtnDisabled = () => {
-    return (
-      title === "" || category === "" || coverImage === "" || content === ""
-    );
+    return title === "" || category === "" || content === "";
   };
 
   return (
@@ -208,6 +206,7 @@ const CreateBlogForm = ({ user }) => {
               className="mt-4 ut-button:bg-black ut-button:ut-readying:bg-black"
               endpoint="imageUploader"
               onClientUploadComplete={(res) => {
+                console.log("Upload Response:", res);
                 if (res && res[0]) {
                   setValue("coverImage", res[0].url);
                   toast({
