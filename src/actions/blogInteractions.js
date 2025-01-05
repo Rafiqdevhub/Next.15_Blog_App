@@ -43,7 +43,7 @@ export async function addCommentAction(data) {
 
       if (decision.reason.isRateLimit()) {
         return {
-          error: "Rate limit excedeed! Please try after some time",
+          error: "Rate limit exceeded! Please try after some time",
           status: 429,
         };
       }
@@ -85,7 +85,7 @@ export async function addCommentAction(data) {
     };
   } catch (e) {
     return {
-      error: "Some error occured!",
+      error: "Some error occurred!",
     };
   }
 }
@@ -110,7 +110,7 @@ export async function searchPostsAction(query) {
 
       if (decision.reason.isRateLimit()) {
         return {
-          error: "Rate limit excedeed! Please try after some time",
+          error: "Rate limit exceeded! Please try after some time",
           status: 429,
         };
       }
@@ -159,7 +159,7 @@ export async function searchPostsAction(query) {
     console.log(e);
 
     return {
-      error: "Some error occured while search! Please try after some time!",
+      error: "Some error occurred while search! Please try after some time!",
     };
   }
 }
