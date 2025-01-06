@@ -1,9 +1,13 @@
-import LoginForm from "@/components/auth/LoginForm"
+import LoginForm from "@/components/auth/LoginForm";
 import { cookies } from "next/headers";
-import Link from "next/link"
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const LoginPage =async () => {
+export const metadata = {
+  title: "Login",
+  description: "Login to your account",
+};
+const LoginPage = async () => {
   const token = (await cookies()).get("token")?.value;
 
   if (token) {
@@ -48,7 +52,7 @@ const LoginPage =async () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
