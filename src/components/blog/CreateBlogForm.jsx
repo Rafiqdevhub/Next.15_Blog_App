@@ -101,12 +101,14 @@ const CreateBlogForm = ({ user }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
+      console.log("API Response:", result);
 
       if (result.success) {
         toast({
           title: "Success",
           description: result.success,
         });
+        console.log("Success Response: Redirecting to Home");
         router.push("/");
       } else {
         toast({
@@ -116,11 +118,13 @@ const CreateBlogForm = ({ user }) => {
         });
       }
     } catch (e) {
+      console.error("Error in Blog Submit:", e);
       toast({
         title: "Error",
         description: "Some error occurred",
         variant: "destructive",
       });
+      alert("Some error occurred");
     } finally {
       setIsLoading(false);
     }
